@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  encoding: utf-8
+  host: localhost
+  database: <%= ENV["DATABASE_NAME"] %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  port: <%= ENV.fetch('DATABASE_PORT', 5432) %>
+
+production:
+  adapter: postgresql
+  encoding: utf-8
+  host: localhost
+  database: <%= ENV["DATABASE_NAME"] %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  port: <%= ENV.fetch('DATABASE_PORT', 5432) %>

@@ -1,0 +1,68 @@
+body{margin: 0;padding: 0;box-sizing: border-box;}
+.wrapper{float: left;width: 100%;}
+.no-margin{margin-left: 0;margin-right: 0;}
+.left_align{position: relative;left: 8%;}
+.login-box .title{text-align: center;}
+.container-left,.container-right{width: 100%;float: left;}
+.patient_login_form,.doctor_login_form,.appoinment_login_form{margin-left: 20%;}
+.patient_login_block,.doctor_login_block, .appointment_login_block ,.view_appointment_block{width: 50%;float: left;}
+.patient_login_block,.view_appointment_block{background-color: #eef0d3;padding: 20px;}
+.doctor_login_block{padding: 20px;background-color: #fff;height:400px;}
+.btn-default{background-color: #f36613;border-color: #f36613}
+.inner-login{    width: 100%;
+    float: left;
+    padding: 30px;}
+
+ .login-box,.patient_login_form{padding: 30px;}
+ .block_title{text-transform: uppercase;font-size: 16px;text-align: center;width: 70%;color: 
+#355352;
+    font-weight: bold;}
+ .view_appointment_form table thead {
+    background-color: #033f59;
+}
+.view_appointment_form table thead tr th {
+	color: #fff;
+}
+ .view_appointment_form table tbody {
+    background-color: #fff;
+}  
+.form-group .form-control{width: 70%; border: 1px solid #70752630;}
+
+.form-group .btn-default{position: relative;
+    right: 30%;}
+    .appointment_title .block_title{width: 100%;}
+#smaller-border {
+  
+    border:1px solid #8080803d;
+    width: 37%;
+    position: relative;
+    left: 17%;
+
+  
+}
+.appointment_title #smaller-border{
+	left: 32%;
+
+}
+.logout-button a {float:right;color:#000000;background-color:#f36613;width:55px;border: 1px solid transparent;
+    border-radius: 4px;padding:5px;}
+
+table.table{
+    border-spacing: 0 10px;
+    border: none !important;
+       border-collapse: inherit;
+}
+@media only screen and (max-width: 1100px){
+		
+}    
+
+@media only screen and (max-width: 840px){
+	.login-box, .patient_login_form{padding: 0;}
+		.patient_login_form,.doctor_login_form,.appoinment_login_form{margin-left: 20%;}
+}
+
+@media only screen and (max-width: 1024px){
+	.patient_login_form,.doctor_login_form,.appoinment_login_form{margin-left:20%;}
+	.container-left,.container-right{width: 100%;float: left;}
+}
+ 

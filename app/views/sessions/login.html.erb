@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Login</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <%= stylesheet_link_tag 'login', media: 'all'%>
+</head>
+<body>
+<div class="container">
+  <div class="login col-md-12 col-sm-12 col-xs-12">
+    <h3 class="login_form_Title">Login or <a href="#">Sign up</a></h3>
+    <!-- socilaNuttons -->
+    <div class="row login-sm-offset-3 socialButtons">
+      <div class="col-xs-6 col-sm-3 col-md-2 col-md-offset-2">
+        <a href="/auth/google_oauth2" class="btn btn-lg btn-block omb_btn-google" id="sign_in">
+          <i class="fa fa-google-plus"></i>
+          <span class="">Google+</span>
+        </a>
+      </div>
+    </div>
+    <!-- socilaNuttons end -->
+
+    <!-- loginOrsignup -->
+    <div class="row login-sm-offset-3 login_Or_Signup">
+      <div class="col-xs-12 col-sm-6">
+        <hr class="horizontalr_bar">
+        <span class="span_horizonatl_line">or</span>
+      </div>
+    </div>
+    <!-- loginOrsignup end -->
+
+    <!-- loginForm -->
+    <div class="row login-sm-offset-3">
+      <div class="col-xs-12 col-sm-6">
+        <%= form_tag '/verify-login', method: 'POST', class: 'loginForm' do %>
+            <div class="input-group bottom_space">
+              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              <%= text_field_tag :email, nil, placeholder: 'Email', class:  'form-control' %>
+            </div>
+
+            <div class="input-group pswd_space">
+              <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+              <%= password_field_tag :password, nil, class: 'form-control', placeholder: 'Password' %>
+            </div>
+            <button type="submit" id="login-button">Login</button>
+        <% end %>
+      </div>
+    </div>
+    <!-- loginForm end -->
+  </div><!-- login block end -->
+</div><!-- container -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+  document.getElementById("myButton").onclick = function () {
+    location.href = "home.html";
+  };
+</script>
+
+</div>
+
+</body>
+</html>

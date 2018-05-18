@@ -1,0 +1,57 @@
+<div class="appointment_login_block">
+  <div class="inner-login">
+    <div class="login-box col-sm-12">
+      <div class="doctor_login_form">
+        <%= csrf_meta_tag%>
+        <%= form_tag("/patient/appointment", method: "post", class: "form-horizontal", id: "appointment_form") do%>
+            <div class="form-group">
+              <div class="">
+                <h3 class="block_title">appointment</h3>
+                <div id="smaller-border"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= select_tag "appointment[doctor_id]", [], :class=>"form-control"%>
+            </div>
+
+            <div class="form-group">
+              <%= select_tag "appointment[patient_id]", [], :class=>"form-control"%>
+            </div>
+
+            <div class="form-group">
+              <%= text_field :appointment, :diseases, :placeholder=>"Diseases", :class=>"form-control", required: true %>
+            </div>
+
+            <div class="form-group">
+              <%=button_tag 'Submit',type: 'submit',class: 'btn btn-default pull-right'%>
+            </div>
+            <p class="response-message"></p>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).on ('submit', '#appointment_form',function(event) {
+    event.preventDefault();
+    var $this = $('#appointment_form');
+    $.ajax({
+      url : '<%= Webapp.config.api_url %>/appointments',
+      type : 'post',
+      data : $this.serialize(),
+      datatype : 'JSON',
+      beforeSend : function(xhr) {
+        xhr.setRequestHeader("AuthToken", "<%= session[:auth_token] %>")
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+      },
+      success : function(data) {
+        $this.find(".response-message").html(data.message);
+        if (data.status) {
+          $("input[type=text]").val('');
+          get_appointments();
+        }
+      }
+    })
+  });
+</script>

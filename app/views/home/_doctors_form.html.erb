@@ -1,0 +1,58 @@
+<div class="doctor_login_block">
+  <div class="inner-login">
+    <div class="login-box col-sm-12">
+      <div class="patient_login_form">
+        <%= csrf_meta_tag%>
+        <%= form_tag("/doctors", method: "post", class: "form-horizontal", id: "doctor_form") do%>
+            <div class="form-group">
+              <div class="" >
+                <h3 class="block_title">doctor</h3>
+                <div id="smaller-border"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= text_field :doctor, :name, :placeholder=>"Name", :class=>"form-control",  required: true %>
+            </div>
+
+            <div class="form-group">
+              <%= text_field :doctor, :phone_no, :placeholder=>"Phone Number", :class=>"form-control",  required: true %>
+            </div>
+
+            <div class="form-group">
+              <%= text_field :doctor, :specialization, :placeholder=>"Specialization", :class=>"form-control",  required: true %>
+            </div>
+
+            <div class="form-group">
+              <%=button_tag 'Submit',type: 'submit',class: 'btn btn-default pull-right'%>
+            </div>
+            <p class="response-message"></p>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $(document).on('submit', '#doctor_form',function(event) {
+    var $this = $("#doctor_form");
+    event.preventDefault();
+    $.ajax({
+      url: '<%= Webapp.config.api_url %>/doctors',
+      type: 'POST',
+      data: $this.serialize(),
+      datatype: 'JSON',
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader("AuthToken", "<%= session[:auth_token] %>");
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+      },
+      success: function (data) {
+        $this.find(".response-message").html(data.message);
+        if (data.status) {
+          $("input[type=text]").val('');
+          get_doctors();
+        }
+      }
+    });
+  });
+</script>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Applicatino</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <%= stylesheet_link_tag 'dashboard', media: 'all'%>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="wrapper">
+  <div class="container-left">
+    <div class="row no-margin">
+
+      <%= render 'patients_form' %>
+      <%= render 'doctors_form' %>
+
+    </div>
+  </div>
+  <div class="container-right">
+    <div class="row no-margin">
+
+      <%= render 'appointments_form' %>
+      <%= render 'appointments_list' %>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function get_doctors() {
+    $.ajax({
+      url: '<%= Webapp.config.api_url %>/doctors',
+      type: 'GET',
+      datatype: 'JSON',
+      beforeSend: function(request) {
+        request.setRequestHeader("AuthToken", "<%= session[:auth_token] %>");
+      },
+      success: function (response) {
+        var output = [];
+        $.each(response.data, function(index, value)
+        {
+          output.push('<option value="'+ value[0] +'">'+ value[1] +'</option>');
+        });
+        $('select#appointment_doctor_id').html(output.join(''));
+      }
+    });
+  }
+
+  function get_patients() {
+    $.ajax({
+      url: '<%= Webapp.config.api_url %>/patients',
+      type: 'GET',
+      datatype: 'JSON',
+      beforeSend: function(request) {
+        request.setRequestHeader("AuthToken", "<%= session[:auth_token] %>");
+      },
+      success: function (response) {
+        var output = [];
+        $.each(response.data, function(index, value)
+        {
+          output.push('<option value="'+ value[0] +'">'+ value[1] +'</option>');
+        });
+        $('select#appointment_patient_id').html(output.join(''));
+      }
+    });
+  }
+
+  function get_appointments() {
+    $.ajax({
+      url: '<%= Webapp.config.api_url %>/appointments',
+      type: 'GET',
+      datatype: 'JSON',
+      beforeSend: function(request) {
+        request.setRequestHeader("AuthToken", "<%= session[:auth_token] %>");
+      },
+      success: function (response) {
+        var output = [];
+        $.each(response.data, function(index, value)
+        {
+          output.push('<tr><td>' + value[0] + '</td><td>' + value[1] + '</td><td>' + value[2] + '</td></tr>');
+        });
+        $('.view_appointment_block table tbody').html(output.join(''));
+      }
+    });
+  }
+
+  $(document).ready(function(){
+    get_doctors();
+    get_patients();
+    get_appointments();
+  });
+</script>
+</body>
+</html>
